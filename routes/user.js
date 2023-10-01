@@ -1,25 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const {v4 : uuidv4} = require('uuid');
-// const userController = require('..controllers/userController');
+const userController = require('../controllers/userController');
 
 class User {
-    constructor(userName,userId,userEmail) {
+    constructor(userName,userId,userEmail,password) {
         this.userName = userName;
         this.userId = userId;
         this.userEmail = userEmail;
+        this.password = password;
     }
 };
 
-router.post('/add' , (req,res)=> {
-    const body = req.body;
-    console.log(req.body);
-    const userId = uuidv4();
-    console.log("UserId: ",userId);
-    const user = new User(body.userName,userId,body.userEmail);
+router.post('/add',userController.addUser)
 
-    // res.json(user);
-} );
+router.post('/auth',userController.authenticateUser)
+
+router.post('/edit',userController.editUser)
 
 
 

@@ -40,6 +40,7 @@ async function run() {
 const DB = client.db("Todos-Project");
 
 const usersCollection = DB.collection("users");
+const todosCollection = DB.collection("todos");
 
 const Schema = MongoClient.Schema;
 
@@ -54,4 +55,4 @@ async function trial(){
   }
 }
 
-module.exports = { run,trial };
+module.exports = { run,usersCollection,todosCollection };
