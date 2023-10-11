@@ -1,15 +1,23 @@
 const express = require("express");
-const database = require('./database');
+const database = require("./database");
 
 // const db
 
-async function insertUser(user){
-    try{
-        await database.usersCollection.insertOne(user)
-    }catch(err){
-        console.error("Error insertinf User err: ",err);
-        throw err;
-    }
+function insertUser(user) {
+  return database.usersCollection.insertOne(user);
 }
 
-module.exports = {insertUser};
+function initialUserTodo(initialTodos) {
+  return database.todosCollection.insertOne(initialTodos);
+}
+
+// function pushTodo(filter, update) {
+//     return database.todosCollection.updateOne(filter, update);
+
+// }
+
+async function updateTodo(filter, update) {
+  return database.todosCollection.updateOne(filter, update);
+}
+
+module.exports = { insertUser, initialUserTodo, updateTodo };

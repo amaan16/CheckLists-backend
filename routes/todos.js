@@ -1,33 +1,22 @@
 const express = require("express");
 const router = express.Router();
-// const userController = require('..controllers/todosController');
+const todosController = require("../controllers/todosController");
 
-class TodosOfUser{
-    constructor(userName,userId,todos){
-        this.userName = userName;
-        this.userId = userId;
-        this.todo = todos ? todos.map((todo)=> new Todo (todo.nameOfTodo,todo.display,todo.items)) : [];
-    }
-}
+router.post("/get", todosController.getTodos);
 
-class Todo{
-    constructor(nameOfTodo, display, items){
-        this.nameOfTodo = nameOfTodo;
-        this.display = display;
-        this.items = items.map((itemData)=> new Item(itemData.itemName,itemData.status));
-    }
-}
+router.post("/add", todosController.addTodo);
 
-class Item{
-    constructor(itemName,status){
-        this.itemName = itemName;
-        this.status =status;
-    }
-}
+router.post("/remove", todosController.removeTodo);
 
-// router.post('' , (req,res)=> {
-//     console.log("Users")
-// } );
+router.post("/edit", todosController.editTodo);
+
+router.post("/add-task", todosController.addTask);
+
+router.post("/remove-task", todosController.removeTask);
+
+router.post("/update-status", todosController.updateStatus);
+
+router.post("/update-visibility", todosController.updateVisibility);
 
 
 
