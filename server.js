@@ -1,6 +1,7 @@
 const express = require("express");
 const database = require('./database.js')
 const dbWriter = require("./dbWriter");
+const cronJob = require("./cronJob");
 
 const port = 5000;
 const app = express();
@@ -20,6 +21,7 @@ app.use('/todos' , todosRoutes);
 
 app.listen(port,()=> {
     console.log(`Server running on port ${port}`);
+    cronJob.cronJobScheduler();
 })
 
 app.get("/",(req,res) => {

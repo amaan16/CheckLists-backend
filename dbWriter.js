@@ -20,4 +20,11 @@ async function updateTodo(filter, update) {
   return database.todosCollection.updateOne(filter, update);
 }
 
-module.exports = { insertUser, initialUserTodo, updateTodo };
+function setAllDailyTodosStatusToNo() {
+  return database.usersCollection.updateMany(
+      { 'todos.nameOfTodo': 'Daily' },
+      { $set: { 'todos.$.items.$[].Status': 'No' } }
+  );
+}
+
+module.exports = { insertUser, initialUserTodo, updateTodo,setAllDailyTodosStatusToNo };

@@ -50,6 +50,7 @@ async function addTodo(req, res) {
     const filter = {
       userId: body.userId,
     };
+    console.log("newTodo: ",newTodo)
     const update = { $push: { todos: newTodo } };
     const result = await dbWriter.updateTodo(filter, update);
     if (result.modifiedCount == 1) {
@@ -233,4 +234,13 @@ async function updateVisibility(req,res){
   }
 }
 
-module.exports = { TodosOfUser, getTodos, addTodo, removeTodo, addTask, removeTask, editTodo, updateStatus, updateVisibility };
+async function updateAllDailyTodosStatusToNo() {
+  try {
+      const result = await dbWriter.setAllDailyTodosStatusToNo();
+      console.log('All Daily Todos Status set to "No"', result);
+  } catch (error) {
+      console.log('Error setting all Daily Todos Status to "No":', error);
+  }
+}
+
+module.exports = { TodosOfUser, getTodos, addTodo, removeTodo, addTask, removeTask, editTodo, updateStatus, updateVisibility, updateAllDailyTodosStatusToNo};
